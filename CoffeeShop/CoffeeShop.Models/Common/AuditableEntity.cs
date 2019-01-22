@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoffeeShop.Models.DatabaseContext;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeShop.Models.Common
@@ -13,8 +14,8 @@ namespace CoffeeShop.Models.Common
         public DateTimeOffset? UpdatedDate { get; set; }
         [ScaffoldColumn(false)]
         public string UpdatedBy { get; set; }
-        //public ApplicationUser CreatedApplicationUser { get; set; }
-        //public ApplicationUser UpdatedApplicationUser { get; set; }
+        public ApplicationUser CreatedApplicationUser { get; set; }
+        public ApplicationUser UpdatedApplicationUser { get; set; }
     }
 
 }
