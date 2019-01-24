@@ -75,6 +75,7 @@
     <Compile Include="Common\IEntity.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="DatabaseContext\IdentityModels.cs" />
+    <Compile Include="Map\CompanyMap.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

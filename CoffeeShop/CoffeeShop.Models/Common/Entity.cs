@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CoffeeShop.Models.Common
 {
-    public abstract class IEntity
+    public abstract class BaseEntity
     {
 
     }
 
-    public abstract class Entity<T> : IEntity, IEntity<T>
+    public abstract class Entity<T> : BaseEntity, IEntity<T>
     {
         public virtual T Id { get; set; }
     }
 
-    public abstract class EntityResult<T> : IEntity
+    public abstract class EntityResult<T> : BaseEntity
     {
         public virtual T Entity { get; set; }
     }

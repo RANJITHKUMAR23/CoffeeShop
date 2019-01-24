@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using CoffeeShop.Web.Models;
 using CoffeeShop.Web.Providers;
 using CoffeeShop.Web.Results;
+using CoffeeShop.Models.DatabaseContext;
 
 namespace CoffeeShop.Web.Controllers
 {
