@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using CoffeeShop.Models.Map;
+using CoffeeShop.Models.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -23,7 +27,7 @@ namespace CoffeeShop.Models.DatabaseContext
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("CofeeShopContext", throwIfV1Schema: false)
         {
         }
 
@@ -31,5 +35,72 @@ namespace CoffeeShop.Models.DatabaseContext
         {
             return new ApplicationDbContext();
         }
+
+        // List of Entities
+        public virtual DbSet<Company> Company { get; set; }
+
+
+
+
+        /// <summary>
+        /// On model creating
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<ApplicationDbContext>(new CreateInitializer());
+            //Database.SetInitializer<ApplicationDbContext>(new AlwaysCreateInitializer());
+            //Database.SetInitializer<ApplicationDbContext>(new DropCreateIfChangeInitializer());
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            modelBuilder.Entity<ApplicationUser>()
+                       .HasMany(m => m.Claims).WithOptional().HasForeignKey(x => x.UserId).WillCascadeOnDelete(false);
+
+            modelBuilder.Configurations.Add(new CompanyMap());
+
+        }
+
+
+        #region Db Initializer
+
+        public class CreateInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
+        {
+            protected override void Seed(ApplicationDbContext context)
+            {
+                //context.Seed(context);
+                base.Seed(context);
+            }
+        }
+
+        public class DropCreateIfChangeInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+        {
+            protected override void Seed(ApplicationDbContext context)
+            {
+                //context.Seed(context);
+                base.Seed(context);
+            }
+        }
+       
+        public class AlwaysCreateInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+        {
+            protected override void Seed(ApplicationDbContext context)
+            {
+                //context.Seed(context);
+                base.Seed(context);
+            }
+        }
+
+        #endregion
+
+
     }
+
+
+
 }
