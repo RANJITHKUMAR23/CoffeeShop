@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -37,6 +39,7 @@ namespace CoffeeShop.Models.DatabaseContext
         }
 
         // List of Entities
+        public virtual DbSet<Currency> Currency { get; set; }
         public virtual DbSet<Company> Company { get; set; }
 
 
@@ -62,6 +65,7 @@ namespace CoffeeShop.Models.DatabaseContext
             modelBuilder.Entity<ApplicationUser>()
                        .HasMany(m => m.Claims).WithOptional().HasForeignKey(x => x.UserId).WillCascadeOnDelete(false);
 
+            modelBuilder.Configurations.Add(new CurrencyMap());
             modelBuilder.Configurations.Add(new CompanyMap());
 
         }
@@ -73,7 +77,7 @@ namespace CoffeeShop.Models.DatabaseContext
         {
             protected override void Seed(ApplicationDbContext context)
             {
-                //context.Seed(context);
+                context.Seed(context);
                 base.Seed(context);
             }
         }
@@ -86,7 +90,7 @@ namespace CoffeeShop.Models.DatabaseContext
                 base.Seed(context);
             }
         }
-       
+
         public class AlwaysCreateInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
         {
             protected override void Seed(ApplicationDbContext context)
@@ -99,8 +103,44 @@ namespace CoffeeShop.Models.DatabaseContext
         #endregion
 
 
+
+        #region Seed Data 
+        /// <summary>
+        /// Seed Data
+        /// </summary>
+        /// <param name="Context"></param>
+        public void Seed(ApplicationDbContext Context)
+        {
+            var currentDate = DateTimeOffset.Now;
+            try
+            {
+                /// Currency
+                var listCurrency = new List<Currency>() {
+                 new Currency() { Id = 1, Name = "Indian Rupee",Symbol="₹",NoOfDecimalPlaces=2},
+                 new Currency() { Id = 2, Name = "USD",Symbol="$",NoOfDecimalPlaces=2},
+                };
+                Context.Currency.AddRange(listCurrency);
+                Context.SaveChanges();
+
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+            }
+        }
+        #endregion
     }
 
-
-
 }
+
+
+
+

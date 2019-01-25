@@ -76,7 +76,9 @@
     <Compile Include="Common\Entity.cs" />
     <Compile Include="DatabaseContext\IdentityModels.cs" />
     <Compile Include="Map\CompanyMap.cs" />
+    <Compile Include="Map\CurrencyMap.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Currency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

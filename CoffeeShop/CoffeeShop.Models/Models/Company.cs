@@ -21,5 +21,7 @@ namespace CoffeeShop.Models.Models
         public string Website { get; set; }
         public int GstNo { get; set; }
         public string Logo { get; set; }
+        public virtual Currency Currency { get; set; }
+
     } 
 }
