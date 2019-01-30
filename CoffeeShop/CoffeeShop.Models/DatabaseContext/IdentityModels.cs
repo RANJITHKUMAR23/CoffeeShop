@@ -41,6 +41,15 @@ namespace CoffeeShop.Models.DatabaseContext
         // List of Entities
         public virtual DbSet<Currency> Currency { get; set; }
         public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<State> State { get; set; }
+        public virtual DbSet<ProductGroup> ProductGroup { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Units> Units { get; set; }
+
+
+
+
 
 
 
@@ -67,6 +76,11 @@ namespace CoffeeShop.Models.DatabaseContext
 
             modelBuilder.Configurations.Add(new CurrencyMap());
             modelBuilder.Configurations.Add(new CompanyMap());
+            modelBuilder.Configurations.Add(new StateMap());
+            modelBuilder.Configurations.Add(new CountryMap());
+            modelBuilder.Configurations.Add(new ProductGroupMap());
+            modelBuilder.Configurations.Add(new ProductMap());
+            modelBuilder.Configurations.Add(new UnitsMap());
 
         }
 

@@ -21,6 +21,7 @@ namespace CoffeeShop.Models.Map
             Property(m => m.GstNo).IsRequired();
             Property(m => m.Website).IsOptional().HasMaxLength(500);
             Property(m => m.Logo).IsOptional().HasMaxLength(4000);
+            HasMany(m => m.Units).WithRequired().HasForeignKey(s => s.CompanyId);
             HasRequired(m => m.CreatedApplicationUser).WithMany().HasForeignKey(m => m.CreatedBy).WillCascadeOnDelete(false);
             HasOptional(m => m.UpdatedApplicationUser).WithMany().HasForeignKey(m => m.UpdatedBy).WillCascadeOnDelete(false);
 

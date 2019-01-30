@@ -1,4 +1,5 @@
 ﻿using CoffeeShop.Models.Common;
+using System.Collections.Generic;
 
 namespace CoffeeShop.Models.Models
 {
@@ -6,6 +7,7 @@ namespace CoffeeShop.Models.Models
     {
         public Company()
         {
+            this.Units = new HashSet<Units>();
         }
 
         public string Name { get; set; }
@@ -22,6 +24,7 @@ namespace CoffeeShop.Models.Models
         public int GstNo { get; set; }
         public string Logo { get; set; }
         public virtual Currency Currency { get; set; }
+        public virtual ICollection<Units> Units { get; set; }
 
     } 
 }

@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace CoffeeShop.Models.Map
 {
-    public class CurrencyMap : EntityTypeConfiguration<Currency>
+    public class ProductGroupMap : EntityTypeConfiguration<ProductGroup>
     {
-        public CurrencyMap()
-        {
+        public ProductGroupMap()
+            {
             HasKey(m => m.Id);
             Property(m => m.Name).IsRequired().HasMaxLength(100);
-            Property(m => m.Symbol).IsRequired();
-            HasMany(m => m.Company).WithRequired().HasForeignKey(s => s.CurrencyId);
-        }
+            Property(m => m.Description);
+    }
     }
 }

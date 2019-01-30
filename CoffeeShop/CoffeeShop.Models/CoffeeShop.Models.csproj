@@ -76,9 +76,19 @@
     <Compile Include="Common\Entity.cs" />
     <Compile Include="DatabaseContext\IdentityModels.cs" />
     <Compile Include="Map\CompanyMap.cs" />
+    <Compile Include="Map\CountryMap.cs" />
     <Compile Include="Map\CurrencyMap.cs" />
+    <Compile Include="Map\ProductGroupMap.cs" />
+    <Compile Include="Map\ProductMap.cs" />
+    <Compile Include="Map\StateMap.cs" />
+    <Compile Include="Map\UnitsMap.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\State.cs" />
+    <Compile Include="Models\Units.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
