@@ -8,6 +8,9 @@ namespace CoffeeShop.Models.Models
         public Company()
         {
             this.Units = new HashSet<Units>();
+            this.ProductGroup = new HashSet<ProductGroup>();
+            this.Product = new HashSet<Product>();
+
         }
 
         public string Name { get; set; }
@@ -25,6 +28,8 @@ namespace CoffeeShop.Models.Models
         public string Logo { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual ICollection<Units> Units { get; set; }
+        public virtual ICollection<ProductGroup> ProductGroup { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
 
     } 
 }

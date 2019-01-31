@@ -15,6 +15,7 @@ namespace CoffeeShop.Models.Map
             HasKey(m => m.Id);
             Property(m => m.Name).IsRequired().HasMaxLength(100);
             Property(m => m.Description);
-    }
+            HasMany(m => m.Product).WithRequired().HasForeignKey(s => s.ProductGroupId);
+        }
     }
 }

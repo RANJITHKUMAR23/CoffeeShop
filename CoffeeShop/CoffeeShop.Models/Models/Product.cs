@@ -17,7 +17,12 @@ namespace CoffeeShop.Models.Models
         public bool IsPurchasable { get; set; }
         public bool IsActive { get; set; }
         public bool IsBillOfMaterial { get; set; }
+        public int CompanyId { get; set; }
+        public int ProductGroupId { get; set; }
         public virtual Units Unit { get; set; }
-        
+        public virtual Company Company { get; set; }
+        public virtual ProductGroup ProductGroup { get; set; }
+
+
     }
 }
